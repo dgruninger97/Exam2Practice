@@ -194,6 +194,10 @@ def practice_problem2b(sequence):
     Type hints:
       :type sequence [str]
     """
+    seq = ''
+    for k in range(len(sequence)):
+        seq += str(sequence[k])
+    return seq
     ####################################################################
     # TODO: 4. Implement and test this function.
     #     The testing code is already written for you (above).
