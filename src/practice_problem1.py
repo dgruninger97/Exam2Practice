@@ -40,14 +40,14 @@ def main():
     ####################################################################
 
     run_test_init()
-#   run_test_append_string()
+    run_test_append_string()
 #     run_test_double()
 #     run_test_shrink()
 #     run_test_double_then_shrink()
     run_test_reset()
 #     run_test_steal()
 #     run_test_get_history()
-#     run_test_combined_box()
+#   run_test_combined_box()
 
 
 ########################################################################
@@ -141,6 +141,19 @@ class Box(object):
         Type hints:
           :type additional_contents: str
         """
+        length = self.volume - len(self.contents)
+        toAdd = ''
+        print(len(additional_contents))
+        if (len(additional_contents) < length):
+            length = len(additional_contents)
+        for k in range(length):
+            toAdd = toAdd + additional_contents[k]
+        self.contents = self.contents + toAdd
+        newLength = len(additional_contents) - length
+        toReturn = ''
+        for k in range(newLength):
+            toReturn = toReturn + additional_contents[k + length]
+        return toReturn
         # --------------------------------------------------------------
         # TODO: 3. Implement and test this function.
         #     See the testing code (below) for more examples.
@@ -421,6 +434,10 @@ class Box(object):
         Type hints:
           :type other_box: Box
         """
+        b1contents = self.contents + other_box.contents
+        b1volume = self.volume + other_box.volume
+        b1 = Box(b1contents, b1volume)
+        return b1
         # --------------------------------------------------------------
         # TODO: 10. Implement and test this function.
         #     The testing code is already written for you (above).
