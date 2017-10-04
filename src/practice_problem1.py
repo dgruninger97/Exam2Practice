@@ -39,12 +39,12 @@ def main():
     # UN-comment tests as you work the problems.
     ####################################################################
 
-    run_test_init()
-    run_test_append_string()
-#     run_test_double()
-#     run_test_shrink()
+#    run_test_init()
+#    run_test_append_string()
+#    run_test_double()
+    run_test_shrink()
 #     run_test_double_then_shrink()
-    run_test_reset()
+#    run_test_reset()
 #     run_test_steal()
 #     run_test_get_history()
 #   run_test_combined_box()
@@ -141,9 +141,8 @@ class Box(object):
         Type hints:
           :type additional_contents: str
         """
-        length = self.volume - len(self.contents)
         toAdd = ''
-        print(len(additional_contents))
+        length = self.volume - len(self.contents)
         if (len(additional_contents) < length):
             length = len(additional_contents)
         for k in range(length):
@@ -155,7 +154,7 @@ class Box(object):
             toReturn = toReturn + additional_contents[k + length]
         return toReturn
         # --------------------------------------------------------------
-        # TODO: 3. Implement and test this function.
+        # DONE: 3. Implement and test this function.
         #     See the testing code (below) for more examples.
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -210,8 +209,10 @@ class Box(object):
           #   s is 'Robot Fun'   [this is the part of the doubled
           #                       contents that did NOT fit]
         """
+        toReturn = self.append_string(self.contents)
+        return toReturn
         # --------------------------------------------------------------
-        # TODO: 4. Implement and test this function.
+        # DONE: 4. Implement and test this function.
         #     The testing code is already written for you (above).
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -259,6 +260,17 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+        self.volume = new_volume
+        length = self.volume - new_volume
+        toAdd = ''
+        toReturn = ''
+        if (new_volume < len(self.contents)):
+            for k in range(new_volume):
+                toAdd += self.contents[k]
+            self.contents = toAdd
+            for k in range(length):
+                toReturn += self.contents[k + len(self.contents)]
+            return toReturn
         # --------------------------------------------------------------
         # TODO: 5. Implement and test this function.
         #     The testing code is already written for you (above).
