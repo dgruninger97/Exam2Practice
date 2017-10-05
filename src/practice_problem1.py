@@ -42,10 +42,10 @@ def main():
 #    run_test_init()
 #    run_test_append_string()
 #    run_test_double()
-    run_test_shrink()
-#     run_test_double_then_shrink()
-#    run_test_reset()
-#     run_test_steal()
+#   run_test_shrink()
+  #  run_test_double_then_shrink()
+ #   run_test_reset()
+    run_test_steal()
 #     run_test_get_history()
 #   run_test_combined_box()
 
@@ -141,13 +141,13 @@ class Box(object):
         Type hints:
           :type additional_contents: str
         """
-        toAdd = ''
+        clippedString = ''
         length = self.volume - len(self.contents)
         if (len(additional_contents) < length):
             length = len(additional_contents)
         for k in range(length):
-            toAdd = toAdd + additional_contents[k]
-        self.contents = self.contents + toAdd
+            clippedString = clippedString + additional_contents[k]
+        self.contents = self.contents + clippedString
         newLength = len(additional_contents) - length
         toReturn = ''
         for k in range(newLength):
@@ -261,18 +261,20 @@ class Box(object):
           :type new_volume: int
         """
         self.volume = new_volume
-        length = self.volume - new_volume
-        toAdd = ''
-        toReturn = ''
-        if (new_volume < len(self.contents)):
-            for k in range(new_volume):
-                toAdd += self.contents[k]
-            self.contents = toAdd
-            for k in range(length):
-                toReturn += self.contents[k + len(self.contents)]
-            return toReturn
+        clippedString = ''
+        stringtoReturn = ''
+        emptyString = ''
+        if (len(self.contents) > self.volume):
+            for k in range(self.volume):
+                clippedString += self.contents[k]
+            for k in range(self.volume, len(self.contents)):
+                stringtoReturn += self.contents[k]
+            self.contents = clippedString
+            return stringtoReturn
+        else:
+            return emptyString
         # --------------------------------------------------------------
-        # TODO: 5. Implement and test this function.
+        # DONE: 5. Implement and test this function.
         #     The testing code is already written for you (above).
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -327,6 +329,9 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+        clippedDouble = self.double()
+        clippedShrink = self.shrink(new_volume)
+        return (len(clippedDouble + clippedShrink))
         # --------------------------------------------------------------
         # TODO: 6. Implement and test this function.
         #     The testing code is already written for you (above).
@@ -349,7 +354,7 @@ class Box(object):
         self.contents = self.firstcontents
         self.volume = self.firstvolume
         # --------------------------------------------------------------
-        # TODO: 7. Implement and test this function.
+        # DONE: 7. Implement and test this function.
         #     The testing code is already written for you (above).
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -376,8 +381,21 @@ class Box(object):
         Type hints:
           :type other_box: Box
         """
+        # self.contents = other_box.contents
+        # self.volume = other_box.volume
+        # clippedString = ''
+        # stringtoReturn = ''
+        # for k in range(self.volume):
+        #     clippedString += self.contents[k]
+        # for k in range(self.volume, len(self.contents)):
+        #     stringtoReturn += self.contents[k]
+        # other_box.contents = stringtoReturn
+
+        clippedString = self.append_string(other_box.contents)
+        other_box.contents = clippedString
+
         # --------------------------------------------------------------
-        # TODO: 8. Implement and test this function.
+        # DONE: 8. Implement and test this function.
         #     The testing code is already written for you (above).
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -390,8 +408,8 @@ class Box(object):
         #    ** TWO **   LINES OF CODE.
         ################################################################
 
-    def get_history(self):
 
+    def get_history(self):
         """
         What comes in:
           -- self
