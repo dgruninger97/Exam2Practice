@@ -333,7 +333,7 @@ class Box(object):
         clippedShrink = self.shrink(new_volume)
         return (len(clippedDouble + clippedShrink))
         # --------------------------------------------------------------
-        # TODO: 6. Implement and test this function.
+        # DONE: 6. Implement and test this function.
         #     The testing code is already written for you (above).
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -438,6 +438,7 @@ class Box(object):
           h = b.get_history()
           #   h is now ['GoodGo', 'GoodBye']
         """
+
         # --------------------------------------------------------------
         # TODO: 9. Implement and test this function.
         #     The testing code is already written for you (above).
